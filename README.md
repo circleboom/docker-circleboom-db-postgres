@@ -38,11 +38,7 @@ db.myawesomedomain.com {
 }
 ```
 
-Open up your server's 443 port to outside access before setting Caddyfile and rebuilding your docker-compose
-
-```
-ufw allow 443/tcp
-```
+Open up your server's 443 port to outside access before setting Caddyfile and rebuilding your docker-compose via your server's or hosting provider's firewall. By default, docker modifies iptables on linux directly https://docs.docker.com/network/iptables/
 
 If you don't want to open your web interface to the public, you could always create a tunnel for it
 
