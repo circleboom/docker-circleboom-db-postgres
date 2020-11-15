@@ -30,7 +30,7 @@ which publishes Pgadmin web interface on the server's port 80.
 
 Replace ```:80``` with your domain name to get automatic https via LetsEncrypt. Add your domain to serve only https (recommended)
 
-Don't forget to set your DNS first as Caddy will automatically validate and create certificates for you; 
+Don't forget to set your DNS first as Caddy will automatically validate and create certificates for you as soon as it started.
 
 ```
 db.myawesomedomain.com {
@@ -47,3 +47,9 @@ sudo ssh -N -L 443:127.0.0.1:443 root@server-public-ip -i ~/.ssh/id_rsa
 ```
 
 and visit https://127.0.0.1
+
+## Spin up the containers
+
+```
+docker-compose up -d
+```
