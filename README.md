@@ -18,7 +18,7 @@ PGADMIN_LISTEN_PORT=8080
 
 ## Caddy Config
 
-Caddy config is named ```Caddyfile``` and it is pretty straight-forward.
+Caddy config is named ```Caddyfile``` and it is pretty straightforward.
 
 **Default configuration is**
 ```
@@ -49,3 +49,5 @@ If you don't want to open your web interface to the public, you could always cre
 ```
 sudo ssh -N -L 443:127.0.0.1:443 root@server-public-ip -i ~/.ssh/id_rsa
 ```
+
+and visit https://127.0.0.1
