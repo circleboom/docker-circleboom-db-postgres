@@ -1,0 +1,37 @@
+version: '3.6'
+services:
+  postgres:
+    image: postgres:13.1
+    restart: always
+    volumes:
+    - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+    - "${POSTGRES_SERVER_PORT}:${POSTGRES_SERVER_PORT}"
+  pgadmin4:
+    depends_on:
+    - postgres  
+    image: dpage/pgadmin4:4.28
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+  caddy:
+    image: caddy:2.2.1
+    depends_on:
+    - postgres 
+    - pgadmin4
+    restart: always
+    ports:
+    - "80:80"
+    - "443:443"
+    volumes:
+    - ./Caddyfile:/etc/caddy/Caddyfile
+    - caddy_data:/data
+    - caddy_config:/config
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:

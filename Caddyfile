@@ -1,0 +1,10 @@
+# replace :80 with your domain name to get automatic https via LetsEncrypt
+# Default http. Add your domain to serve only https (recommended)
+# don't forget to set your DNS first as Caddy will automatically validate and create certificates for you; 
+# db.myawesomedomain.com {
+#   reverse_proxy pgadmin4:8080
+# }
+
+:80 {
+  reverse_proxy pgadmin4:8080
+}
