@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-    - "${POSTGRES_SERVER_PORT}:${POSTGRES_SERVER_PORT}"
+    - "${POSTGRES_LISTEN_IP}:${POSTGRES_SERVER_PORT}:${POSTGRES_SERVER_PORT}"
   pgadmin4:
     depends_on:
     - postgres  
@@ -24,6 +24,8 @@ services:
     - postgres 
     - pgadmin4
     restart: always
+    environment:
+    - "CADDY_SITE_ADDRESS=${CADDY_SITE_ADDRESS}"     
     ports:
     - "80:80"
     - "443:443"
