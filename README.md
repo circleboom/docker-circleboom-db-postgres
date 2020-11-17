@@ -1,4 +1,4 @@
-# Postgres DB with web administration interface
+# Postgres DB with a web administration interface
 
 This docker compose file uses these containers
 - Postgres v13.1 as PostgreSQL DB https://hub.docker.com/_/postgres
