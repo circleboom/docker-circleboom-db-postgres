@@ -3,6 +3,11 @@ services:
   postgres:
     image: postgres:13.1
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "25"
     volumes:
     - db_data:/var/lib/postgresql/data
     environment:
@@ -12,18 +17,30 @@ services:
   pgadmin4:
     depends_on:
     - postgres  
-    image: dpage/pgadmin4:4.28
+    image: dpage/pgadmin4:5.2
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"    
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
       PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
+    volumes:
+    - pdadmin_backup:/backup
   caddy:
     image: caddy:2.2.1
     depends_on:
     - postgres 
     - pgadmin4
     restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"    
     environment:
     - "CADDY_SITE_ADDRESS=${CADDY_SITE_ADDRESS}"     
     ports:
@@ -35,5 +52,6 @@ services:
     - caddy_config:/config
 volumes:
   db_data:
+  pdadmin_backup:
   caddy_data:
   caddy_config:
